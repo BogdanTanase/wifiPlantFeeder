@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WifiPlantFeeder</string>
+    <string name="loggin_username">Username</string>
+    <string name="button_send">Send</string>
+    <string name="button_login">Login</string>
+    <string name="loggin_password">Password</string>
+</resources>
