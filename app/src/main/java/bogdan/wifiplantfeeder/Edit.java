@@ -15,8 +15,8 @@ import android.widget.TextView;
 public class Edit extends AppCompatActivity {
     private String name;
     private String addedOn;
-    private int repeat=10;
-    private int quantity=10;
+    private int repeat;
+    private int quantity;
     Button saveButton;
     Button cancelButton;
     EditText repeatInput;
@@ -57,10 +57,18 @@ public class Edit extends AppCompatActivity {
         defaultSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
-                repeatInput.setText(repeat);
-                repeatInput.setClickable(false);
-                quantityInput.setText(quantity);
-                quantityInput.setClickable(false);
+                if(isChecked){
+                    repeatInput.setText("10");
+                    repeatInput.setEnabled(false);
+                    quantityInput.setText("10");
+                    quantityInput.setEnabled(false);
+                }
+                else{
+                    repeatInput.setEnabled(true);
+                    repeatInput.setText("");
+                    quantityInput.setEnabled(true);
+                    quantityInput.setText("");
+                }
 
             }
         });
