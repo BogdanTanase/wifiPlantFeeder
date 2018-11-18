@@ -2,6 +2,8 @@ package bogdan.wifiplantfeeder;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,13 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 
 public class Edit extends AppCompatActivity {
@@ -40,11 +49,41 @@ public class Edit extends AppCompatActivity {
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //to add personal data base
-
-                //to send info to rbp
-            }
+            public void onClick(final View view) {
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Create URL
+                        URL githubEndpoint = null;
+                        URL httpbinEndpoint = null;
+                        try {
+                            httpbinEndpoint = new URL("http://192.168.10.163:5000/on");
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        }
+                        HttpsURLConnection myConnection = null;
+                        try {
+                            myConnection = (HttpsURLConnection) httpbinEndpoint.openConnection();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            myConnection.setRequestMethod("POST");
+                        } catch (ProtocolException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            if (myConnection.getResponseCode() == 200) {
+                                Snackbar successMessage= Snackbar.make(view, "saved",3);
+                            } else {
+                                Snackbar faillMessage= Snackbar.make(view, "failled",3);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            };
         });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
