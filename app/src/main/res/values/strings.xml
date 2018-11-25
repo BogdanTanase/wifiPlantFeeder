@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">WifiPlantFeeder</string>
+    <string name="hello">Hello</string>
+    <string name="hello_text">Sign in into your Account</string>
     <string name="loggin_username">Username</string>
-    <string name="button_send">Send</string>
-    <string name="button_login">Login</string>
     <string name="loggin_password">Password</string>
+    <string name="button_sign_up">Sign up</string>
+    <string name="button_login">Login</string>
+
 </resources>
