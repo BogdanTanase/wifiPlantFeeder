@@ -4,8 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background=""
+    android:background="@drawable/backgroundall"
     tools:context=".Login">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="206dp"
+        android:layout_height="88dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        app:srcCompat="@drawable/hello" />
 
     <Button
         android:id="@+id/signUp"
@@ -18,12 +27,13 @@
         android:layout_marginLeft="51dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="175dp"
-        android:text="@string/button_sign_up"
+        android:background="@drawable/signup"
         android:textAllCaps="false"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/login"
+        android:background="@drawable/login"
         android:layout_width="130dp"
         android:layout_height="45dp"
         android:layout_alignParentEnd="true"
@@ -35,8 +45,7 @@
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginBottom="175dp"
-        android:onClick="logginMethod"
-        android:text="@string/button_login" />
+        android:onClick="logginMethod" />
 
     <EditText
         android:id="@+id/usernameInput"
@@ -53,8 +62,8 @@
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/username"
         android:ems="10"
-        android:hint="@string/loggin_username"
         android:inputType="textPersonName" />
 
     <EditText
@@ -72,51 +81,8 @@
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/password"
         android:ems="10"
-        android:hint="@string/loggin_password"
         android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/hello"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="84dp"
-        android:layout_marginLeft="84dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginRight="85dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:fadingEdge="none"
-        android:gravity="center"
-        android:inputType="text"
-        android:text="@string/hello"
-        android:textColor="@android:color/white" />
-
-    <EditText
-        android:id="@+id/helloText"
-        android:layout_width="226dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/hello"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="79dp"
-        android:layout_marginLeft="79dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="79dp"
-        android:layout_marginRight="79dp"
-        android:ems="10"
-        android:gravity="center_vertical|center"
-        android:inputType="textPersonName"
-        android:text="@string/hello_text"
-        android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
 </RelativeLayout>
