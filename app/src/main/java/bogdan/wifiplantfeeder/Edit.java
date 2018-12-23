@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -38,8 +39,8 @@ public class Edit extends AppCompatActivity {
     private int quantity;
     Button saveButton;
     Button cancelButton;
-    EditText repeatInput;
-    EditText quantityInput;
+    SeekBar repeatInput;
+    SeekBar quantityInput;
     TextView nameView;
     TextView dateView;
     Switch defaultSwitch;
@@ -49,8 +50,8 @@ public class Edit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        repeatInput=(EditText)findViewById(R.id.repeatInput);
-        quantityInput=(EditText)findViewById(R.id.quantityInput);
+        repeatInput=findViewById(R.id.repeatInput);
+        quantityInput= findViewById(R.id.quantityInput);
         nameView=(TextView)findViewById(R.id.nameTextView);
         dateView=(TextView)findViewById(R.id.addedDateTextView);
         defaultSwitch = (Switch)findViewById(R.id.toDeafult);
@@ -64,6 +65,7 @@ public class Edit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                sendInfo();
+                Edit.super.onBackPressed();
             }
         });
 
@@ -78,16 +80,16 @@ public class Edit extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
                 if(isChecked){
-                    repeatInput.setText("10");
+                    repeatInput.setVerticalScrollbarPosition(10);
                     repeatInput.setEnabled(false);
-                    quantityInput.setText("10");
+                    quantityInput.setVerticalScrollbarPosition(10);
                     quantityInput.setEnabled(false);
                 }
                 else{
                     repeatInput.setEnabled(true);
-                    repeatInput.setText("");
+                    repeatInput.setVerticalScrollbarPosition(0);
                     quantityInput.setEnabled(true);
-                    quantityInput.setText("");
+                    quantityInput.setVerticalScrollbarPosition(0);
                 }
 
             }
@@ -159,8 +161,8 @@ public class Edit extends AppCompatActivity {
     private JSONObject buidJsonObject() throws JSONException {
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.accumulate("quantity", quantityInput.getText().toString());
-        jsonObject.accumulate("repetition",  repeatInput.getText().toString());
+        jsonObject.accumulate("quantity", quantityInput.getVerticalScrollbarPosition());
+        jsonObject.accumulate("repetition",  repeatInput.getVerticalScrollbarPosition());
 
         return jsonObject;
     }

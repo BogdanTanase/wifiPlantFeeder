@@ -16,4 +16,8 @@ public class Meniu extends AppCompatActivity {
         Intent intent = new Intent(this, Edit.class);
         startActivity(intent);
     }
+    public void goToCalendar(View view){
+        Intent intent = new Intent(this, Calendar.class);
+        startActivity(intent);
+    }
 }
