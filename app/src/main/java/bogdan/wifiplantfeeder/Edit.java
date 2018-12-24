@@ -41,6 +41,8 @@ public class Edit extends AppCompatActivity {
     Button cancelButton;
     SeekBar repeatInput;
     SeekBar quantityInput;
+    TextView repeatOutput;
+    TextView quantityOutput;
     TextView nameView;
     TextView dateView;
     Switch defaultSwitch;
@@ -52,6 +54,8 @@ public class Edit extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
         repeatInput=findViewById(R.id.repeatInput);
         quantityInput= findViewById(R.id.quantityInput);
+        repeatOutput=findViewById(R.id.repetitionOutput);
+        quantityOutput=findViewById(R.id.quantityOutput);
         nameView=(TextView)findViewById(R.id.nameTextView);
         dateView=(TextView)findViewById(R.id.addedDateTextView);
         defaultSwitch = (Switch)findViewById(R.id.toDeafult);
@@ -92,6 +96,46 @@ public class Edit extends AppCompatActivity {
                     quantityInput.setVerticalScrollbarPosition(0);
                 }
 
+            }
+        });
+
+        repeatInput.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                // TODO Auto-generated method stub
+                repeatOutput.setText(String.valueOf(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        quantityInput.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                // TODO Auto-generated method stub
+                quantityOutput.setText(String.valueOf(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
             }
         });
     }
@@ -161,8 +205,8 @@ public class Edit extends AppCompatActivity {
     private JSONObject buidJsonObject() throws JSONException {
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.accumulate("quantity", quantityInput.getVerticalScrollbarPosition());
-        jsonObject.accumulate("repetition",  repeatInput.getVerticalScrollbarPosition());
+        jsonObject.accumulate("quantity", quantityInput.getProgress());
+        jsonObject.accumulate("repetition", repeatInput.getProgress());
 
         return jsonObject;
     }

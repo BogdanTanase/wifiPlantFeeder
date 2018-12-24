@@ -7,8 +7,17 @@
     android:background="@drawable/backgroundall"
     tools:context=".Edit">
 
+    <TextView
+        android:id="@+id/reprtitionLable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/saveChanges"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="37dp"
+        android:layout_marginBottom="67dp"
+        android:text="Repetition:" />
+
     <SeekBar
-        android:splitTrack="false"
         android:id="@+id/repeatInput"
         style="@android:style/Widget.Material.SeekBar"
         android:layout_width="149dp"
@@ -16,12 +25,13 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="166dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="167dp"
+        android:max="20"
         android:progressDrawable="@drawable/seekbar_style"
-        android:thumb="@drawable/custom_thumb"
-        android:max="20" />
+        android:splitTrack="false"
+        android:thumb="@drawable/custom_thumb" />
 
     <Button
         android:id="@+id/cancelChanges"
@@ -152,21 +162,46 @@
         android:text="  " />
 
     <SeekBar
-        android:splitTrack="false"
         android:id="@+id/quantityInput"
         style="@android:style/Widget.Material.SeekBar"
         android:layout_width="149dp"
         android:layout_height="29dp"
-        android:layout_alignParentStart="true"
+        android:layout_above="@+id/repeatInput"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="210dp"
-        android:layout_marginRight="210dp"
-        android:layout_marginBottom="166dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginBottom="29dp"
+        android:max="20"
         android:progressDrawable="@drawable/seekbar_style"
-        android:thumb="@drawable/custom_thumb"
-        android:max="20" />
+        android:splitTrack="false"
+        android:thumb="@drawable/custom_thumb" />
+
+    <TextView
+        android:id="@+id/quantityLable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/reprtitionLable"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="37dp"
+        android:layout_marginBottom="40dp"
+        android:text="Quantity:" />
+
+    <TextView
+        android:id="@+id/quantityOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/quantityLable"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="145dp" />
+
+    <TextView
+        android:id="@+id/repetitionOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/reprtitionLable"
+        android:layout_marginStart="41dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/reprtitionLable" />
 
 </RelativeLayout>
