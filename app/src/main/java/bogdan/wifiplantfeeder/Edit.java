@@ -77,6 +77,12 @@ public class Edit extends AppCompatActivity {
                     repeatInput.setEnabled(false);
                     quantityInput.setVerticalScrollbarPosition(10);
                     quantityInput.setEnabled(false);
+                    try {
+                        getWeather();
+                        //TODO make logic for setting the 2
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     repeatInput.setEnabled(true);
                     repeatInput.setVerticalScrollbarPosition(0);
@@ -155,7 +161,7 @@ public class Edit extends AppCompatActivity {
     }
 
     public void getWeather() throws IOException {
-        
+
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()

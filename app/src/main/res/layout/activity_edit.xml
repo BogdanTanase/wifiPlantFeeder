@@ -77,49 +77,19 @@
         android:text="Cancel" />
 
     <TableLayout
+        android:id="@+id/table1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="61dp"
         android:layout_above="@+id/toDeafult"
-        android:layout_below="@+id/infoTable"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="147dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="106dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="69dp"
         android:background="@drawable/ic_chenar_planta"
-        android:visibility="visible">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <SeekBar
-                android:id="@+id/repeatInput"
-                style="@android:style/Widget.Material.SeekBar"
-                android:layout_width="149dp"
-                android:layout_height="29dp"
-                android:layout_margin="10dp"
-                android:max="20"
-                android:progressDrawable="@drawable/seekbar_style"
-                android:splitTrack="false"
-                android:thumb="@drawable/custom_thumb" />
-
-            <TextView
-                android:id="@+id/quantityLable"
-                android:layout_width="6dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Quantity:"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/quantityOutput"
-                android:layout_width="5dp"
-                android:layout_height="20dp"
-                android:layout_margin="10dp" />
-
-        </TableRow>
+        android:visibility="visible"
+        tools:ignore="UnknownId"
+        tools:visibility="visible">
 
         <TableRow
             android:layout_width="match_parent"
@@ -147,6 +117,55 @@
 
             <TextView
                 android:id="@+id/repetitionOutput"
+                android:layout_width="19dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/table2"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_above="@+id/table1"
+        android:layout_below="@+id/infoTable"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="165dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="74dp"
+        android:background="@drawable/ic_chenar_planta"
+        android:visibility="visible"
+        tools:visibility="visible">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <SeekBar
+                android:id="@+id/repeatInput"
+                style="@android:style/Widget.Material.SeekBar"
+                android:layout_width="149dp"
+                android:layout_height="29dp"
+                android:layout_margin="10dp"
+                android:max="20"
+                android:progressDrawable="@drawable/seekbar_style"
+                android:splitTrack="false"
+                android:thumb="@drawable/custom_thumb" />
+
+            <TextView
+                android:id="@+id/quantityLable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Quantity:"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/quantityOutput"
                 android:layout_width="19dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp" />
