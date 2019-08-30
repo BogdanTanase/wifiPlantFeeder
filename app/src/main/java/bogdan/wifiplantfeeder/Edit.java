@@ -22,7 +22,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class Edit extends AppCompatActivity {
+public class Edit extends AppCompatActivity  {
     private String name;
     private String addedOn;
     private int repeat;
@@ -57,7 +57,7 @@ public class Edit extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendInfo();
+//                sendInfo();
                 Edit.super.onBackPressed();
             }
         });
@@ -77,12 +77,12 @@ public class Edit extends AppCompatActivity {
                     repeatInput.setEnabled(false);
                     quantityInput.setVerticalScrollbarPosition(10);
                     quantityInput.setEnabled(false);
-                    try {
-                        getWeather();
-                        //TODO make logic for setting the 2
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        getWeather();
+//                        //TODO make logic for setting the 2
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
                 } else {
                     repeatInput.setEnabled(true);
                     repeatInput.setVerticalScrollbarPosition(0);
@@ -92,6 +92,8 @@ public class Edit extends AppCompatActivity {
 
             }
         });
+
+
 
         repeatInput.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -121,6 +123,7 @@ public class Edit extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
     }
+
 
     public void sendInfo() {
         AsyncTask.execute(new Runnable() {
