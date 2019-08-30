@@ -7,44 +7,6 @@
     android:background="@mipmap/main_background"
     tools:context=".Edit">
 
-    <TextView
-        android:id="@+id/reprtitionLable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/saveChanges"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginBottom="67dp"
-        android:text="Repetition:" />
-
-    <SeekBar
-        android:id="@+id/repeatInput"
-        style="@android:style/Widget.Material.SeekBar"
-        android:layout_width="149dp"
-        android:layout_height="29dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="167dp"
-        android:max="20"
-        android:progressDrawable="@drawable/seekbar_style"
-        android:splitTrack="false"
-        android:thumb="@drawable/custom_thumb" />
-
-    <Button
-        android:id="@+id/cancelChanges"
-        android:layout_width="122dp"
-        android:layout_height="48dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="38dp"
-        android:layout_marginRight="41dp"
-        android:layout_marginBottom="58dp"
-        android:text="Cancel" />
-
     <TableLayout
         android:id="@+id/infoTable"
         android:layout_width="368dp"
@@ -56,82 +18,169 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginRight="16dp"
+        android:background="@drawable/ic_chenar_planta">
 
         <TableRow
             android:id="@+id/pictureNameAndDate"
             android:layout_width="match_parent"
-            android:layout_height="134dp">
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/plantProfilePicture"
-                android:layout_width="132dp"
-                android:layout_height="85dp"
-                tools:srcCompat="@color/colorPrimaryDark" />
+                android:layout_width="115dp"
+                android:layout_height="69dp"
+                tools:srcCompat="@color/colorAccent" />
 
             <Space
-                android:layout_width="20dp"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content" />
 
             <LinearLayout
-                android:id="@+id/nameAndDateLabels"
-                android:layout_width="100dp"
+                android:layout_width="227dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/nameLabel"
+                <ImageView
+                    android:id="@+id/image29"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="Name:" />
+                    android:layout_height="35dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_nume_planta" />
 
-                <TextView
-                    android:id="@+id/dateAddedLabel"
+                <ImageView
+                    android:id="@+id/imageView9"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="Date added:" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/nameAndDateValues"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/nameTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="Cactus" />
-
-                <TextView
-                    android:id="@+id/addedDateTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="ieri" />
+                    android:layout_height="35dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_chenar_planta"
+                    android:contentDescription="TODO" />
             </LinearLayout>
 
         </TableRow>
 
     </TableLayout>
 
+    <Button
+        android:id="@+id/cancelChanges"
+        android:layout_width="122dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="41dp"
+        android:layout_marginBottom="58dp"
+        android:background="@drawable/ic_chenar_planta"
+        android:text="Cancel" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/toDeafult"
+        android:layout_below="@+id/infoTable"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="147dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="106dp"
+        android:background="@drawable/ic_chenar_planta"
+        android:visibility="visible">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <SeekBar
+                android:id="@+id/repeatInput"
+                style="@android:style/Widget.Material.SeekBar"
+                android:layout_width="149dp"
+                android:layout_height="29dp"
+                android:layout_margin="10dp"
+                android:max="20"
+                android:progressDrawable="@drawable/seekbar_style"
+                android:splitTrack="false"
+                android:thumb="@drawable/custom_thumb" />
+
+            <TextView
+                android:id="@+id/quantityLable"
+                android:layout_width="6dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Quantity:"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/quantityOutput"
+                android:layout_width="5dp"
+                android:layout_height="20dp"
+                android:layout_margin="10dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            tools:visibility="visible">
+
+            <SeekBar
+                android:id="@+id/quantityInput"
+                style="@android:style/Widget.Material.SeekBar"
+                android:layout_width="149dp"
+                android:layout_height="29dp"
+                android:layout_margin="10dp"
+                android:max="20"
+                android:progressDrawable="@drawable/seekbar_style"
+                android:splitTrack="false"
+                android:thumb="@drawable/custom_thumb" />
+
+            <TextView
+                android:id="@+id/reprtitionLable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Repetition:" />
+
+            <TextView
+                android:id="@+id/repetitionOutput"
+                android:layout_width="19dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/infoTable"
+        android:layout_alignBottom="@+id/infoTable"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="53dp"
+        android:text="TextView" />
+
     <Switch
         android:id="@+id/toDeafult"
-        android:layout_width="311dp"
-        android:layout_height="31dp"
-        android:layout_below="@+id/infoTable"
+        android:layout_width="179dp"
+        android:layout_height="43dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginLeft="37dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
-        android:layout_marginBottom="308dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginLeft="116dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginRight="116dp"
+        android:layout_marginBottom="166dp"
+        android:background="@drawable/ic_chenar_planta"
         android:text="Deafault" />
 
     <Button
@@ -144,6 +193,7 @@
         android:layout_marginStart="41dp"
         android:layout_marginLeft="41dp"
         android:layout_marginBottom="58dp"
+        android:background="@drawable/ic_chenar_planta"
         android:text="Save" />
 
     <TextView
@@ -156,52 +206,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="183dp"
-        android:layout_marginRight="183dp"
-        android:layout_marginBottom="135dp"
+        android:layout_marginEnd="202dp"
+        android:layout_marginRight="202dp"
+        android:layout_marginBottom="131dp"
         android:text="  " />
 
-    <SeekBar
-        android:id="@+id/quantityInput"
-        style="@android:style/Widget.Material.SeekBar"
-        android:layout_width="149dp"
-        android:layout_height="29dp"
-        android:layout_above="@+id/repeatInput"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="21dp"
-        android:layout_marginRight="21dp"
-        android:layout_marginBottom="29dp"
-        android:max="20"
-        android:progressDrawable="@drawable/seekbar_style"
-        android:splitTrack="false"
-        android:thumb="@drawable/custom_thumb" />
-
-    <TextView
-        android:id="@+id/quantityLable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/reprtitionLable"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginBottom="40dp"
-        android:text="Quantity:" />
-
-    <TextView
-        android:id="@+id/quantityOutput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/quantityLable"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="145dp" />
-
-    <TextView
-        android:id="@+id/repetitionOutput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/reprtitionLable"
-        android:layout_marginStart="41dp"
-        android:layout_marginBottom="0dp"
-        android:layout_toEndOf="@+id/reprtitionLable" />
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

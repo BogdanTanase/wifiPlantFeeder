@@ -1,35 +1,25 @@
 package bogdan.wifiplantfeeder;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
+import javax.net.ssl.HttpsURLConnection;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 public class Edit extends AppCompatActivity {
@@ -52,23 +42,22 @@ public class Edit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        repeatInput=findViewById(R.id.repeatInput);
-        quantityInput= findViewById(R.id.quantityInput);
-        repeatOutput=findViewById(R.id.repetitionOutput);
-        quantityOutput=findViewById(R.id.quantityOutput);
-        nameView=(TextView)findViewById(R.id.nameTextView);
-        dateView=(TextView)findViewById(R.id.addedDateTextView);
-        defaultSwitch = (Switch)findViewById(R.id.toDeafult);
-        saveButton=(Button)findViewById(R.id.saveChanges);
-        cancelButton=(Button)findViewById(R.id.cancelChanges);
-        defaultSwitch=(Switch)findViewById(R.id.toDeafult);
-        RBPConnect=(TextView)findViewById(R.id.RBPConnection);
+        repeatInput = findViewById(R.id.repeatInput);
+        quantityInput = findViewById(R.id.quantityInput);
+        repeatOutput = findViewById(R.id.repetitionOutput);
+        quantityOutput = findViewById(R.id.quantityOutput);
+        nameView = (TextView) findViewById(R.id.nameTextView);
+        defaultSwitch = (Switch) findViewById(R.id.toDeafult);
+        saveButton = (Button) findViewById(R.id.saveChanges);
+        cancelButton = (Button) findViewById(R.id.cancelChanges);
+        defaultSwitch = (Switch) findViewById(R.id.toDeafult);
+        RBPConnect = (TextView) findViewById(R.id.RBPConnection);
 
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               sendInfo();
+                sendInfo();
                 Edit.super.onBackPressed();
             }
         });
@@ -82,14 +71,13 @@ public class Edit extends AppCompatActivity {
 
         defaultSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
-                if(isChecked){
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
                     repeatInput.setVerticalScrollbarPosition(10);
                     repeatInput.setEnabled(false);
                     quantityInput.setVerticalScrollbarPosition(10);
                     quantityInput.setEnabled(false);
-                }
-                else{
+                } else {
                     repeatInput.setEnabled(true);
                     repeatInput.setVerticalScrollbarPosition(0);
                     quantityInput.setEnabled(true);
@@ -99,133 +87,84 @@ public class Edit extends AppCompatActivity {
             }
         });
 
-        repeatInput.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+        repeatInput.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,
-                                          boolean fromUser) {
-                // TODO Auto-generated method stub
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 repeatOutput.setText(String.valueOf(progress));
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
-        quantityInput.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+        quantityInput.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,
-                                          boolean fromUser) {
-                // TODO Auto-generated method stub
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 quantityOutput.setText(String.valueOf(progress));
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
+            public void onStopTrackingTouch(SeekBar seekBar) { }
+        });
+    }
+
+    public void sendInfo() {
+        AsyncTask.execute(new Runnable() {
+            public void run() {
+                // Create URL
+                URL rbpEndpoint = null;
+                try {
+                    rbpEndpoint = new URL("http://192.168.10.163:5000/switch");
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+
+                // Create connection
+                HttpsURLConnection rbpConnect =
+                        null;
+                try {
+                    rbpConnect = (HttpsURLConnection) rbpEndpoint.openConnection();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    rbpConnect.setRequestMethod("POST");
+                } catch (ProtocolException e) {
+                    e.printStackTrace();
+                }
+
+                rbpConnect.setRequestProperty("quantity", String.valueOf(quantityInput.getProgress()));
+                rbpConnect.setRequestProperty("repetition", String.valueOf(repeatInput.getProgress()));
+
+                try {
+                    rbpConnect.getResponseCode();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    public boolean checkNetworkConnection(){
-        ConnectivityManager connMgr = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
+    public void getWeather() throws IOException {
+        
+        OkHttpClient client = new OkHttpClient();
 
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        boolean isConnected = false;
-        if (networkInfo != null && (isConnected = networkInfo.isConnected())) {
-            RBPConnect.setText("Connected");
-            RBPConnect.setBackgroundColor(0xFF7CCC26);
-        } else {
-            RBPConnect.setText("Not connected");
-            RBPConnect.setBackgroundColor(0xFFFF0000);
-        }
+        Request request = new Request.Builder()
+                .url("https://community-open-weather-map.p.rapidapi.com/weather?callback=test&id=2172797&units=%22metric%22%20or%20%22imperial%22&mode=xml%2C%20html&q=Bucharest%2Cro")
+                .get()
+                .addHeader("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
+                .addHeader("x-rapidapi-key", "4bdbd2e979mshbe85be9e7f23d87p1d4339jsn0b9a69e14110")
+                .build();
 
-        return isConnected;
-    }
-    private class HTTPAsyncTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-            // params comes from the execute() call: params[0] is the url.
-            try {
-                try {
-                    return HttpPost(urls[0]);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return "Error!";
-                }
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-
-        }
-    }
-
-    private String HttpPost(String myUrl) throws IOException, JSONException {
-        String result = "";
-
-        URL url = new URL(myUrl);
-
-        // 1. create HttpURLConnection
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("PUT");
-        conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-
-        // 2. build JSON object
-        JSONObject jsonObject = buidJsonObject();
-
-        // 3. add JSON content to POST request body
-        setPostRequestContent(conn, jsonObject);
-
-        // 4. make POST request to the given URL
-        conn.connect();
-
-        // 5. return response message
-        return conn.getResponseMessage()+"";
-
-    }
-
-    private JSONObject buidJsonObject() throws JSONException {
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.accumulate("quantity", quantityInput.getProgress());
-        jsonObject.accumulate("repetition", repeatInput.getProgress());
-
-        return jsonObject;
-    }
-
-    private void setPostRequestContent(HttpURLConnection conn,
-                                       JSONObject jsonObject) throws IOException {
-
-        OutputStream os = conn.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-        writer.write(jsonObject.toString());
-        Log.i(Edit.class.toString(), jsonObject.toString());
-        writer.flush();
-        writer.close();
-        os.close();
-    }
-
-
-    private void sendInfo(){
-        HTTPAsyncTask task = new HTTPAsyncTask();
-        task.execute("http://192.168.10.163:5000/switch");
+        Response response = client.newCall(request).execute();
     }
 }
