@@ -1,6 +1,5 @@
 package bogdan.wifiplantfeeder;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,19 +9,21 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
+import java.util.Arrays;
 
-import javax.net.ssl.HttpsURLConnection;
-
+import cz.msebera.android.httpclient.Header;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class Edit extends AppCompatActivity  {
+public class Edit extends AppCompatActivity {
     private String name;
     private String addedOn;
     private int repeat;
@@ -57,7 +58,11 @@ public class Edit extends AppCompatActivity  {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                sendInfo();
+                try {
+                    sendInfo();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Edit.super.onBackPressed();
             }
         });
@@ -94,7 +99,6 @@ public class Edit extends AppCompatActivity  {
         });
 
 
-
         repeatInput.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
@@ -103,10 +107,12 @@ public class Edit extends AppCompatActivity  {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) { }
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) { }
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
 
         quantityInput.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -117,48 +123,33 @@ public class Edit extends AppCompatActivity  {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) { }
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) { }
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
     }
 
 
-    public void sendInfo() {
-        AsyncTask.execute(new Runnable() {
-            public void run() {
-                // Create URL
-                URL rbpEndpoint = null;
-                try {
-                    rbpEndpoint = new URL("http://192.168.10.163:5000/switch");
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
+    public void sendInfo() throws IOException {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.addHeader("Accept", "application/json");
+        client.addHeader("Content-type", "application/json;charset=utf-8");
+        client.addHeader("repetition", String.valueOf(repeatInput.getProgress()*1000));
+        client.addHeader("quantity", String.valueOf(quantityInput.getProgress()*1000));
 
-                // Create connection
-                HttpsURLConnection rbpConnect =
-                        null;
-                try {
-                    rbpConnect = (HttpsURLConnection) rbpEndpoint.openConnection();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        client.put("http://192.168.10.163:5000/switch", new AsyncHttpResponseHandler(){
 
-                try {
-                    rbpConnect.setRequestMethod("POST");
-                } catch (ProtocolException e) {
-                    e.printStackTrace();
-                }
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                System.out.println("Success " + Arrays.toString(responseBody));
+            }
 
-                rbpConnect.setRequestProperty("quantity", String.valueOf(quantityInput.getProgress()));
-                rbpConnect.setRequestProperty("repetition", String.valueOf(repeatInput.getProgress()));
-
-                try {
-                    rbpConnect.getResponseCode();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                System.out.println("Bad " +error);
             }
         });
     }
