@@ -36,7 +36,8 @@
                 android:id="@+id/plantProfilePicture"
                 android:layout_width="115dp"
                 android:layout_height="69dp"
-                tools:srcCompat="@color/colorAccent" />
+                app:srcCompat="@drawable/planta1"
+                tools:srcCompat="@drawable/planta1" />
 
             <Space
                 android:layout_width="10dp"
@@ -158,13 +159,13 @@
 
     <TextView
         android:id="@+id/nameTextView"
-        android:layout_width="160dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/infoTable"
         android:layout_alignBottom="@+id/infoTable"
         android:layout_marginEnd="27dp"
         android:layout_marginBottom="53dp"
-        android:text="TextView" />
+        android:text="Plant" />
 
     <Switch
         android:id="@+id/toDeafult"

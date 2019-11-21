@@ -22,5 +22,9 @@ public class Login extends AppCompatActivity {
         if ( username.equals("a") && password.equals("a")){
             startActivity(intent);
         }
+        else{
+            ((EditText) findViewById(R.id.usernameInput)).setError("Wrong username");
+            ((EditText) findViewById(R.id.passwordInput)).setError("Wrong password");
+        }
     }
 }
